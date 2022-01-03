@@ -1,0 +1,40 @@
+
+//指定proto3语法
+
+syntax = "proto3";
+
+//包名
+
+package alphas;
+
+//一个为Hello的服务（可定义多个服务,每个服务可定义多个方法）
+
+service AlphaRuleEngine {
+
+	//一个SayHello的方法
+
+	rpc AddRule (AddRuleRequest) returns (AddRuleResponse) {}
+	rpc BuildReport (BuildReportRequest) returns (BuildReportResponse) {}
+}
+
+// 定义发送请求信息
+message AddRuleRequest {
+	string rules = 1;
+}
+
+// 定义响应信息
+message AddRuleResponse {
+	string rules = 1;
+
+}
+
+// 定义发送请求信息
+message BuildReportRequest {
+	string rules = 1;
+}
+
+// 定义响应信息
+message BuildReportResponse {
+	string rules = 1;
+}
+

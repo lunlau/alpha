@@ -13,3 +13,15 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+.idea/
+cover.out
+coverage.html
+test.out
+*.log
+live_detail_data
+!live_detail_data/
+
+ENGINEERING_GUIDE_*
+
+
