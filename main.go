@@ -70,6 +70,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET,PUT,DELETE,POST,OPTIONS")
 	w.Header().Set("Access-Control-Allow-Credentials", "true")
+	w.Header().Set("Access-Control-Allow-Headers", "token,Origin, X-Requested-With, Content-Type, Accept, Authorization")
 	w.WriteHeader(200)
 	w.Write(body)
 	return
