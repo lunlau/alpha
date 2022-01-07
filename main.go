@@ -85,6 +85,11 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	for key, _ := range r.Header {
 		req.Header.Add(key, r.Header.Get(key) )
 	}
+	if req.URL.Query().Get("Authorization") == "" {
+		req.Header.Add("Authorization", getConf().Authorization)
+	} else {
+		req.Header.Add("Authorization", req.URL.Query().Get("Authorization"))
+	}
 	resp,_ := client.Do(req)
 	body, _ := ioutil.ReadAll(resp.Body)
 	fmt.Printf(string(body))
@@ -92,6 +97,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(body)
 	return
 }
+
 func indexHandlerBak(w http.ResponseWriter, r *http.Request) {
 	//fmt.Fprintf(w, "gRPC client")
 	fmt.Println("start index")
@@ -165,6 +171,7 @@ type conf struct {
 	Port   string `yaml:"port"`
 	RIp    string `yaml:"rip"`
 	RPort string `yaml:"rport"`
+	Authorization  string `yaml:"authorization"`
 }
 var gConf conf
 

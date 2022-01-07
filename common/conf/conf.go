@@ -14,6 +14,7 @@ type conf struct {
 	User   string `yaml:"user"`
 	Pwd    string `yaml:"pwd"`
 	Dbname string `yaml:"dbname"`
+	Authorization string `yaml:"dbname"`
 }
 var gConf conf
 

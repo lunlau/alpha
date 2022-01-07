@@ -2,3 +2,4 @@ ip: 127.0.0.1
 port: 8088
 rip: 52.41.98.206
 rport: 3000
+Authorization: "Bearer eyJrIjoibkVvZk1wY0xnUkVCaVA2anRkWE01SE1CRFJaNjlDcTUiLCJuIjoiYW5ja3Nob24yIiwiaWQiOjF9"
