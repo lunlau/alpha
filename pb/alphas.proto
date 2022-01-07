@@ -4,8 +4,7 @@
 syntax = "proto3";
 
 //包名
-
-package alphas;
+package pb;
 
 //一个为Hello的服务（可定义多个服务,每个服务可定义多个方法）
 
