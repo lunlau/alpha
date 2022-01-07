@@ -9,11 +9,6 @@ import (
 	"net/http"
 )
 
-// Application entrance.
-
-const PORT = "9001"
-
-
 func main() {
 	//server := grpc.NewServer()
 	//pb.RegisterAlphaRuleEngineServer(server, &AlphaRuleImpl{})
@@ -27,7 +22,6 @@ func main() {
 	InitConf()
 	// handle http
 	http.Handle("/metrics", promhttp.Handler())
-	http.HandleFunc("/echo", echoHandler)
 	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/api/auth/keys", apiAuthKeys)
 	//http.HandleFunc("/api/dashboards/home", apiDashboardsHome)
@@ -35,27 +29,6 @@ func main() {
 	// serve http
 	//http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("GRPC_CLIENT_PORT")), nil)
 	http.ListenAndServe(fmt.Sprintf("%s:%s", getConf().Ip, getConf().Port), nil)
-}
-
-
-func echoHandler(w http.ResponseWriter, r *http.Request) {
-
-	return
-}
-
-func apiDashboardsHome(w http.ResponseWriter, r *http.Request)   {
-	r.Header.Get("")
-	client := &http.Client{}
-	req,_ := http.NewRequest("GET","http://52.41.98.206:3000/api/dashboards/home",nil)
-	//req.Header.Add("Authorization","Bearer eyJrIjoiR0FKRFF5S1F4aFlNSUFjNlVYQ3JUZ2N1azdNWWNaNDMiLCJuIjoiaGFuY2tzaG9uMiIsImlkIjoxfQ==\" http://52.41.98.206:3000/api/dashboards/home")
-	for key, _ := range r.Header {
-		req.Header.Add(key, r.Header.Get(key) )
-	}
-	resp,_ := client.Do(req)
-	body, _ := ioutil.ReadAll(resp.Body)
-	fmt.Printf(string(body))
-	w.WriteHeader(200)
-	w.Write(body)
 }
 
 func apiAuthKeys(w http.ResponseWriter, r *http.Request)   {
@@ -94,6 +67,10 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	body, _ := ioutil.ReadAll(resp.Body)
 	fmt.Printf(string(body))
 	w.WriteHeader(200)
+	w.Header().Add("Access-Control-Allow-Origin", "*")
+	w.Header().Add("Access-Control-Allow-Methods", "GET,PUT,DELETE,POST,OPTIONS")
+	w.Header().Add("Access-Control-Allow-Credentials", "true")
+	w.Header().Add("Access-Control-Allow-Origin", "*")
 	w.Write(body)
 	return
 }
